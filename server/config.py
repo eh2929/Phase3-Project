@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
 
 naming_convention = {
@@ -20,8 +21,10 @@ metadata = MetaData(naming_convention=naming_convention)
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.json.compact = False
 
 db = SQLAlchemy(app=app, metadata=metadata)
 
 migrate = Migrate(app=app, db=db)
+
 
